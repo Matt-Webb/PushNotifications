@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0125)file:///C:/Users/mattweb/Pictures/William%20Hill%20M%C3%B3vil%20Apuestas%20Deportivas_files/williamhill_cog_comet_iframe.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <script type="application/x-javascript">
+        /**
+         *  Copyright (c) 2010 Mobenga
+         */
+        var requestSequence = 1;
+        var requestTimeout = 40 * 1000;
+        var activeRequests = {};
+        var requestCallbacks = {};
+
+        function helperSqSeperatorFor(url)
+        {
+            return url.indexOf("?")>0?'&':'?';
+        }
+
+        function doCometRequest(src, cb)
+        {
+            var rs = requestSequence ++;
+
+            var headID = document.getElementsByTagName("head")[0];
+            var newScript = document.createElement('script');
+            newScript.type = 'text/javascript';
+            var qsStart = helperSqSeperatorFor(src);
+            var toRequest  = src +qsStart+ "rs=" + (rs) + '&ts=' + new Date().getTime()+"-"+Math.ceil(Math.random() * 100000 + 1);
+
+            newScript.src = toRequest;
+
+            headID.appendChild(newScript);
+            setTimeout(function(){
+                headID.removeChild(newScript);
+            },60*1000);
+
+            activeRequests[rs] = setTimeout(function(){
+                if(typeof(activeRequests[rs]) !== 'undefined')
+                {
+                    doCometRequest(src);
+                }
+            }, requestTimeout);
+
+            requestCallbacks[rs] = cb;
+        }
+
+        function getCometResponse(requestSequence, responseType, arg0, arg1, arg2)
+        {
+            var cb = requestCallbacks[requestSequence];
+            delete requestCallbacks[requestSequence];
+            delete activeRequests[requestSequence];
+
+            if(cb) {
+                cb(responseType, arg0, arg1, arg2);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body></html>

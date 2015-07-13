@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0121)file:///C:/Users/mattweb/Pictures/William%20Hill%20M%C3%B3vil%20Apuestas%20Deportivas_files/williamhill_comet_iframe.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <script type="application/x-javascript">
+        /**
+         *  Copyright (c) 2010 Mobenga
+         */
+        var requestSequence = 1;
+        var requestTimeout = 40 * 1000;
+
+        function doCometRequest(src)
+        {
+            var rs = requestSequence ++;
+
+            var headID = document.getElementsByTagName("head")[0];
+            var newScript = document.createElement('script');
+            newScript.type = 'text/javascript';
+            var qsStart = parent.helperSqSeperatorFor(src);
+            var toRequest  = src +qsStart+ "rs=" + (rs) + '&ts='+new Date().getTime()+"-"+Math.ceil(Math.random() * 100000 + 1);
+
+            newScript.src = toRequest;
+
+            headID.appendChild(newScript);
+            setTimeout(function(){
+                headID.removeChild(newScript);
+            },60*1000);
+
+            parent.activeRequests[rs] = setTimeout(function(){
+                if(typeof(parent.activeRequests[rs]) !== 'undefined')
+                {
+                    doCometRequest(src);
+                }
+            },requestTimeout);
+        }
+
+        function getCometResponse(requestSequence, responseType, arg0, arg1, arg2)
+        {
+            // Skicka till parent frame getCometResponseAuthor
+            parent.getCometResponseAuthor(requestSequence, responseType, arg0, arg1, arg2);
+        }
+    </script>
+</head>
+<body>
+
+</body></html>

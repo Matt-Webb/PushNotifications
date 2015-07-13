@@ -1,0 +1,20 @@
+{
+    "segments": [
+        {
+            "id": 1,
+            "name": "Football"
+        },
+        {
+            "id": 2,
+            "name": "Tennis"
+        },
+        {
+            "id": 3,
+            "name": "Snooker"
+        },
+        {
+            "id": 4,
+            "name": "Rugby"
+        }
+    ]
+}
