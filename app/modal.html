@@ -1,19 +1,17 @@
         
 <div>
         <div class="modal-header">
-            <h3 class="modal-title">Wanna get spammed?</h3>
+            <h3 class="modal-title">Register for updates</h3>
         </div>
         <div class="modal-body">
 
             <p>
-                Sign up to our notifications <br />Tell us which services you'd like to be subscribed to:
+                Tell us which services you're interested in?
             </p>
 
             <div class="checkbox" ng-repeat="item in items">
               <label><input type="checkbox" value="{{item.id}}" ng-model="item.selected">{{ item.name }}</label>
             </div>
-
-
 
         </div>
         <div class="modal-footer">

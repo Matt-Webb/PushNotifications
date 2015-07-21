@@ -3,7 +3,10 @@
 
 var connect = require('connect');
 var serveStatic = require('serve-static');
+var port = 8080;
 
-connect().use(serveStatic(__dirname)).listen(8080);
+connect().use(serveStatic(__dirname)).listen(port);
 
 
+// Logging initialization
+console.log('running test Push Notification application on port: ' + port);
